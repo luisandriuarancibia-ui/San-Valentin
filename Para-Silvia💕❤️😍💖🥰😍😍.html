@@ -1,0 +1,844 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Para Mi Amor ❤️</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Cormorant+Garamond:wght@300;400;600&family=Dancing+Script:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #ff6b9d;
+            --secondary: #c44569;
+            --accent: #ffc8dd;
+            --dark: #2d1b2e;
+            --light: #fff5f7;
+            --gold: #d4af37;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Cormorant Garamond', serif;
+            overflow-x: hidden;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
+            min-height: 100vh;
+        }
+
+        /* Animated Background */
+        .background {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            overflow: hidden;
+        }
+
+        .heart {
+            position: absolute;
+            font-size: 20px;
+            animation: float-up 8s infinite;
+            opacity: 0;
+        }
+
+        @keyframes float-up {
+            0% {
+                opacity: 0;
+                transform: translateY(0) rotate(0deg);
+            }
+            10% {
+                opacity: 1;
+            }
+            90% {
+                opacity: 1;
+            }
+            100% {
+                opacity: 0;
+                transform: translateY(-100vh) rotate(360deg);
+            }
+        }
+
+        /* Login Screen */
+        .login-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .login-box {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 30px;
+            padding: 60px 50px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            text-align: center;
+            max-width: 500px;
+            width: 100%;
+            animation: fadeInScale 0.8s ease-out;
+        }
+
+        @keyframes fadeInScale {
+            from {
+                opacity: 0;
+                transform: scale(0.9);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        .login-box h1 {
+            font-family: 'Dancing Script', cursive;
+            font-size: 3.5rem;
+            color: var(--secondary);
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .login-box p {
+            font-size: 1.3rem;
+            color: #555;
+            margin-bottom: 40px;
+            line-height: 1.6;
+        }
+
+        .input-group {
+            margin-bottom: 30px;
+        }
+
+        .input-group input {
+            width: 100%;
+            padding: 18px 25px;
+            border: 2px solid var(--accent);
+            border-radius: 50px;
+            font-size: 1.1rem;
+            font-family: 'Cormorant Garamond', serif;
+            text-align: center;
+            transition: all 0.3s;
+            background: rgba(255, 255, 255, 0.8);
+        }
+
+        .input-group input:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 20px rgba(255, 107, 157, 0.3);
+            transform: scale(1.02);
+        }
+
+        .login-btn {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            border: none;
+            padding: 18px 60px;
+            font-size: 1.3rem;
+            font-family: 'Cormorant Garamond', serif;
+            font-weight: 600;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s;
+            box-shadow: 0 10px 30px rgba(255, 107, 157, 0.4);
+        }
+
+        .login-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 40px rgba(255, 107, 157, 0.6);
+        }
+
+        .error {
+            color: var(--secondary);
+            font-size: 1rem;
+            margin-top: 15px;
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+
+        .error.show {
+            opacity: 1;
+        }
+
+        /* Main Content */
+        .main-content {
+            display: none;
+            min-height: 100vh;
+            padding: 40px 20px;
+        }
+
+        .main-content.active {
+            display: block;
+            animation: fadeIn 1s ease-out;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 60px;
+            animation: slideDown 1s ease-out;
+        }
+
+        @keyframes slideDown {
+            from {
+                opacity: 0;
+                transform: translateY(-50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .header h1 {
+            font-family: 'Dancing Script', cursive;
+            font-size: 4rem;
+            color: white;
+            text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.3);
+            margin-bottom: 20px;
+        }
+
+        .header .subtitle {
+            font-size: 1.5rem;
+            color: rgba(255, 255, 255, 0.95);
+            font-weight: 300;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Gallery */
+        .gallery {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 40px;
+            padding: 20px;
+        }
+
+        .photo-card {
+            background: white;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.2);
+            transition: all 0.4s;
+            opacity: 0;
+            animation: fadeInUp 0.8s ease-out forwards;
+        }
+
+        .photo-card:nth-child(1) { animation-delay: 0.2s; }
+        .photo-card:nth-child(2) { animation-delay: 0.4s; }
+        .photo-card:nth-child(3) { animation-delay: 0.6s; }
+        .photo-card:nth-child(4) { animation-delay: 0.8s; }
+        .photo-card:nth-child(5) { animation-delay: 1s; }
+        .photo-card:nth-child(6) { animation-delay: 1.2s; }
+        .photo-card:nth-child(7) { animation-delay: 1.4s; }
+        .photo-card:nth-child(8) { animation-delay: 1.6s; }
+        .photo-card:nth-child(9) { animation-delay: 1.8s; }
+        .photo-card:nth-child(10) { animation-delay: 2s; }
+        .photo-card:nth-child(11) { animation-delay: 2.2s; }
+        .photo-card:nth-child(12) { animation-delay: 2.4s; }
+        .photo-card:nth-child(13) { animation-delay: 2.6s; }
+        .photo-card:nth-child(14) { animation-delay: 2.8s; }
+        .photo-card:nth-child(15) { animation-delay: 3s; }
+        .photo-card:nth-child(16) { animation-delay: 3.2s; }
+        .photo-card:nth-child(17) { animation-delay: 3.4s; }
+        .photo-card:nth-child(18) { animation-delay: 3.6s; }
+        .photo-card:nth-child(19) { animation-delay: 3.8s; }
+        .photo-card:nth-child(20) { animation-delay: 4s; }
+        .photo-card:nth-child(21) { animation-delay: 4.2s; }
+        .photo-card:nth-child(22) { animation-delay: 4.4s; }
+        .photo-card:nth-child(23) { animation-delay: 4.6s; }
+        .photo-card:nth-child(24) { animation-delay: 4.8s; }
+        .photo-card:nth-child(25) { animation-delay: 5s; }
+        .photo-card:nth-child(26) { animation-delay: 5.2s; }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .photo-card:hover {
+            transform: translateY(-10px) scale(1.02);
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.3);
+        }
+
+        .photo-card img {
+            width: 100%;
+            height: 350px;
+            object-fit: cover;
+            display: block;
+        }
+
+        .photo-card .message {
+            padding: 35px;
+            text-align: center;
+        }
+
+        .photo-card .message p {
+            font-size: 1.2rem;
+            color: #444;
+            line-height: 1.9;
+            font-weight: 400;
+            font-style: italic;
+            text-align: center;
+            white-space: pre-line;
+        }
+
+        /* Love Letter Section */
+        .love-letter {
+            max-width: 800px;
+            margin: 80px auto;
+            background: white;
+            padding: 60px;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.2);
+            animation: fadeInUp 1s ease-out 5.5s both;
+        }
+
+        .love-letter h2 {
+            font-family: 'Dancing Script', cursive;
+            font-size: 3rem;
+            color: var(--secondary);
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .love-letter p {
+            font-size: 1.3rem;
+            line-height: 2;
+            color: #333;
+            margin-bottom: 20px;
+            text-align: justify;
+        }
+
+        .signature {
+            font-family: 'Dancing Script', cursive;
+            font-size: 2rem;
+            color: var(--primary);
+            text-align: right;
+            margin-top: 40px;
+        }
+
+        /* Music Player */
+        .music-player {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background: white;
+            border-radius: 50%;
+            width: 70px;
+            height: 70px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            cursor: pointer;
+            transition: all 0.3s;
+            z-index: 1000;
+        }
+
+        .music-player:hover {
+            transform: scale(1.1);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.4);
+        }
+
+        .music-player.playing {
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% {
+                box-shadow: 0 10px 30px rgba(255, 107, 157, 0.5);
+            }
+            50% {
+                box-shadow: 0 10px 50px rgba(255, 107, 157, 0.8);
+            }
+        }
+
+        .music-icon {
+            font-size: 2rem;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .login-box h1 {
+                font-size: 2.5rem;
+            }
+
+            .header h1 {
+                font-size: 3rem;
+            }
+
+            .gallery {
+                grid-template-columns: 1fr;
+                gap: 30px;
+            }
+
+            .love-letter {
+                padding: 40px 30px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Animated Background -->
+    <div class="background" id="background"></div>
+
+    <!-- Login Screen -->
+    <div class="login-container" id="loginContainer">
+        <div class="login-box">
+            <h1>Mi Amor ❤️</h1>
+            <p>Ingresa nuestra fecha especial para ver tu sorpresa...</p>
+            <div class="input-group">
+                <input 
+                    type="text" 
+                    id="passwordInput" 
+                    placeholder="DD/MM/AAAA"
+                    maxlength="10"
+                />
+            </div>
+            <button class="login-btn" onclick="checkPassword()">Entrar</button>
+            <p class="error" id="errorMsg">Esa no es nuestra fecha especial 💔</p>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <div class="main-content" id="mainContent">
+        <div class="header">
+            <h1>Fragmentos de nuestro amor ✨</h1>
+            <p class="subtitle">Cada foto cuenta nuestra historia de amor</p>
+        </div>
+
+        <div class="gallery">
+            <!-- FOTO 1 -->
+            <div class="photo-card">
+                <img src="imgg/silvia1.jpeg" alt="Nuestro amor">
+                <div class="message">
+                    <p>En tus ojos encontré el universo,
+en tu sonrisa, mi razón de ser.
+Cada latido de mi corazón es un verso
+que solo para ti quiero tejer.</p>
+                </div>
+            </div>
+
+            <!-- FOTO 2 -->
+            <div class="photo-card">
+                <img src="imgg/silvia2.jpeg" alt="Nuestro amor">
+                <div class="message">
+                    <p>Eres la melodía que mi alma canta,
+la luz que disipa mi oscuridad.
+Tu amor es el ancla que me levanta,
+mi refugio, mi paz, mi verdad.</p>
+                </div>
+            </div>
+
+            <!-- FOTO 3 -->
+            <div class="photo-card">
+                <img src="imgg/3.jpeg" alt="Nuestro amor">
+                <div class="message">
+                    <p>Como las estrellas adornan el cielo,
+tú adornas cada día de mi existir.
+Eres mi sueño, mi anhelo,
+la razón por la que quiero vivir.</p>
+                </div>
+            </div>
+
+            <!-- FOTO 4 -->
+            <div class="photo-card">
+                <img src="imgg/4.jpeg" alt="Nuestro amor">
+                <div class="message">
+                    <p>Tus manos son el mapa de mi destino,
+tus besos, la promesa de eternidad.
+Contigo encontré mi camino,
+mi hogar, mi dicha, mi felicidad.</p>
+                </div>
+            </div>
+
+            <!-- FOTO 5 -->
+            <div class="photo-card">
+                <img src="imgg/5.jpeg" alt="Nuestro amor">
+                <div class="message">
+                    <p>Si pudiera regalarte las estrellas,
+las arrancaría una por una del cielo.
+Pero nada iguala las huellas
+que tu amor dejó en mi corazón sincero.</p>
+                </div>
+            </div>
+
+            <!-- FOTO 6 -->
+            <div class="photo-card">
+                <img src="imgg/6.jpeg" alt="Nuestro amor">
+                <div class="message">
+                    <p>Eres poesía sin palabras,
+arte en su forma más pura.
+Mi alma en ti se resguarda,
+eres mi más bella aventura.</p>
+                </div>
+            </div>
+
+            <!-- FOTO 7 -->
+            <div class="photo-card">
+                <img src="imgg/7.jpeg" alt="Nuestro amor">
+                <div class="message">
+                    <p>En cada amanecer veo tu rostro,
+en cada atardecer, tu calor.
+Eres mi tesoro más precioso,
+la esencia misma del amor.</p>
+                </div>
+            </div>
+
+            <!-- FOTO 8 -->
+            <div class="photo-card">
+                <img src="imgg/8.jpeg" alt="Nuestro amor">
+                <div class="message">
+                    <p>Tus abrazos son mi fortaleza,
+tu voz, mi canción favorita.
+Amo tu ternura y tu belleza,
+eres mi historia más bonita.</p>
+                </div>
+            </div>
+
+            <!-- FOTO 9 -->
+            <div class="photo-card">
+                <img src="imgg/9.jpeg" alt="Nuestro amor">
+                <div class="message">
+                    <p>Contigo el tiempo se detiene,
+cada segundo es una eternidad.
+Mi corazón solo te pertenece,
+eres mi única realidad.</p>
+                </div>
+            </div>
+
+            <!-- FOTO 10 -->
+            <div class="photo-card">
+                <img src="imgg/10.jpeg" alt="Nuestro amor">
+                <div class="message">
+                    <p>En un mar de personas te encontré,
+fuiste el faro en mi tempestad.
+Desde entonces nunca te dejé,
+eres mi amor, mi verdad.</p>
+                </div>
+            </div>
+
+            <!-- FOTO 11 -->
+            <div class="photo-card">
+                <img src="imgg/11.jpeg" alt="Nuestro amor">
+                <div class="message">
+                    <p>Tus palabras son bálsamo al alma,
+tu presencia, mi bendición.
+Contigo encuentro la calma,
+eres dueña de mi corazón.</p>
+                </div>
+            </div>
+
+            <!-- FOTO 12 -->
+            <div class="photo-card">
+                <img src="imgg/12.jpeg" alt="Nuestro amor">
+                <div class="message">
+                    <p>Si el amor tuviera un rostro,
+sería el tuyo sin dudar.
+Eres mi más grande logro,
+mi razón para amar y soñar.</p>
+                </div>
+            </div>
+
+            <!-- FOTO 13 -->
+            <div class="photo-card">
+                <img src="imgg/13.jpeg" alt="Nuestro amor">
+                <div class="message">
+                    <p>Como la luna necesita al sol,
+yo te necesito a mi lado.
+Eres mi norte, mi farol,
+mi presente y mi futuro amado.</p>
+                </div>
+            </div>
+
+            <!-- FOTO 14 -->
+            <div class="photo-card">
+                <img src="imgg/14.jpeg" alt="Nuestro amor">
+                <div class="message">
+                    <p>En tus labios encuentro el paraíso,
+en tu mirada, mi eternidad.
+Cada día a tu lado es un hechizo,
+eres mi única necesidad.</p>
+                </div>
+            </div>
+
+            <!-- FOTO 15 -->
+            <div class="photo-card">
+                <img src="imgg/15.jpeg" alt="Nuestro amor">
+                <div class="message">
+                    <p>Eres la respuesta a mis oraciones,
+el sueño que se hizo realidad.
+Llenaste mi vida de emociones,
+eres mi amor en totalidad.</p>
+                </div>
+            </div>
+
+            <!-- FOTO 16 -->
+            <div class="photo-card">
+                <img src="imgg/16.jpeg" alt="Nuestro amor">
+                <div class="message">
+                    <p>Tu risa es música celestial,
+tu esencia, pura magia.
+Nuestro amor es algo especial,
+una hermosa y dulce fantasía.</p>
+                </div>
+            </div>
+
+            <!-- FOTO 17 -->
+            <div class="photo-card">
+                <img src="imgg/17.jpeg" alt="Nuestro amor">
+                <div class="message">
+                    <p>Contigo descubrí el significado
+del verdadero amor sincero.
+Eres mi destino anhelado,
+lo que siempre quise primero.</p>
+                </div>
+            </div>
+
+            <!-- FOTO 18 -->
+            <div class="photo-card">
+                <img src="imgg/18.jpeg" alt="Nuestro amor">
+                <div class="message">
+                    <p>Eres el verso de mi poesía,
+la nota perfecta en mi canción.
+Mi amor, mi alegría,
+la dueña de mi corazón.</p>
+                </div>
+            </div>
+
+            <!-- FOTO 19 -->
+            <div class="photo-card">
+                <img src="imgg/19.jpeg" alt="Nuestro amor">
+                <div class="message">
+                    <p>Cada día contigo es un regalo,
+cada beso tuyo es un tesoro.
+En tus brazos me resguardo,
+eres lo que más adoro.</p>
+                </div>
+            </div>
+
+            <!-- FOTO 20 -->
+            <div class="photo-card">
+                <img src="imgg/20.jpeg" alt="Nuestro amor">
+                <div class="message">
+                    <p>Eres mi sol en la mañana,
+mi luna en la noche oscura.
+Tu amor es mi ventana
+a una vida llena de dulzura.</p>
+                </div>
+            </div>
+
+            <!-- FOTO 21 -->
+            <div class="photo-card">
+                <img src="imgg/21.jpeg" alt="Nuestro amor">
+                <div class="message">
+                    <p>En tus palabras encuentro consuelo,
+en tu mirada, mi hogar.
+Eres mi cielo,
+mi razón para amar sin cesar.</p>
+                </div>
+            </div>
+
+            <!-- FOTO 22 -->
+            <div class="photo-card">
+                <img src="imgg/22.jpeg" alt="Nuestro amor">
+                <div class="message">
+                    <p>Tu amor es mi guía,
+tu corazón, mi refugio sagrado.
+Cada noche, cada día,
+te amo más de lo imaginado.</p>
+                </div>
+            </div>
+
+            <!-- FOTO 23 -->
+            <div class="photo-card">
+                <img src="imgg/23.jpeg" alt="Nuestro amor">
+                <div class="message">
+                    <p>Eres el sueño que se hizo verdad,
+la respuesta a mi oración.
+Tu amor es mi libertad,
+mi completa y total devoción.</p>
+                </div>
+            </div>
+
+            <!-- FOTO 24 -->
+            <div class="photo-card">
+                <img src="imgg/24.jpeg" alt="Nuestro amor">
+                <div class="message">
+                    <p>Como el río busca el mar,
+mi alma te busca sin cesar.
+Eres mi paz, mi hogar,
+la razón de mi respirar.</p>
+                </div>
+            </div>
+
+                </div>
+            </div>
+
+        </div>
+
+        <div class="love-letter">
+            <h2>Para Ti, Mi Amor</h2>
+            <p>
+                No hay palabras suficientes para expresar lo que significas para mí. Cada día a tu lado es un regalo, 
+                cada sonrisa tuya es mi felicidad, cada momento juntos es un recuerdo que atesoro para siempre.
+            </p>
+            <p>
+                Gracias por ser tú, por estar aquí, por amarme como lo haces. Gracias por llenar mi vida de color, 
+                de risas, de amor. Eres mi persona favorita, mi mejor amiga, mi gran amor.
+            </p>
+            <p>
+                Esta pequeña sorpresa es solo un reflejo de todo lo que guardas en mi corazón. 
+                Te amo hoy, mañana y siempre.
+            </p>
+            <div class="signature">Con todo mi amor ❤️</div>
+        </div>
+    </div>
+
+    <!-- Music Player -->
+    <div class="music-player" id="musicPlayer" onclick="toggleMusic()" style="display: none;">
+        <span class="music-icon">🎵</span>
+    </div>
+
+    <script>
+        // Create floating hearts
+        function createHearts() {
+            const background = document.getElementById('background');
+            for (let i = 0; i < 20; i++) {
+                setTimeout(() => {
+                    const heart = document.createElement('div');
+                    heart.classList.add('heart');
+                    heart.innerHTML = '❤️';
+                    heart.style.left = Math.random() * 100 + '%';
+                    heart.style.animationDelay = Math.random() * 5 + 's';
+                    heart.style.fontSize = (Math.random() * 20 + 15) + 'px';
+                    background.appendChild(heart);
+                }, i * 300);
+            }
+        }
+
+        createHearts();
+
+        // Password check
+        function checkPassword() {
+            const input = document.getElementById('passwordInput');
+            const error = document.getElementById('errorMsg');
+            const password = input.value.trim();
+
+            if (password === '02/03/2024') {
+                document.getElementById('loginContainer').style.display = 'none';
+                document.getElementById('mainContent').classList.add('active');
+                document.getElementById('musicPlayer').style.display = 'flex';
+                
+                // Create more hearts on success
+                for (let i = 0; i < 30; i++) {
+                    setTimeout(() => {
+                        const heart = document.createElement('div');
+                        heart.classList.add('heart');
+                        heart.innerHTML = ['❤️', '💕', '💖', '💗', '💘'][Math.floor(Math.random() * 5)];
+                        heart.style.left = Math.random() * 100 + '%';
+                        heart.style.fontSize = (Math.random() * 30 + 20) + 'px';
+                        document.getElementById('background').appendChild(heart);
+                    }, i * 100);
+                }
+            } else {
+                error.classList.add('show');
+                input.style.borderColor = 'var(--secondary)';
+                input.value = '';
+                
+                setTimeout(() => {
+                    error.classList.remove('show');
+                    input.style.borderColor = 'var(--accent)';
+                }, 3000);
+            }
+        }
+
+        // Enter key support
+        document.getElementById('passwordInput').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                checkPassword();
+            }
+        });
+
+        // Music player
+        let isPlaying = false;
+        let audio = null;
+        
+        function toggleMusic() {
+            const player = document.getElementById('musicPlayer');
+            
+            // Si no existe el audio, créalo
+            if (!audio) {
+                // AQUÍ PONES LA RUTA DE TU CANCIÓN
+                audio = new Audio('tu-cancion.mp3');
+                audio.loop = true; // La canción se repetirá automáticamente
+                audio.volume = 0.5; // Volumen al 50%
+            }
+            
+            isPlaying = !isPlaying;
+            
+            if (isPlaying) {
+                player.classList.add('playing');
+                audio.play().catch(function(error) {
+                    console.log('Error al reproducir:', error);
+                });
+            } else {
+                player.classList.remove('playing');
+                audio.pause();
+            }
+        }
+
+        // Add sparkle effect on mouse move
+        document.addEventListener('mousemove', function(e) {
+            if (Math.random() > 0.95) {
+                const sparkle = document.createElement('div');
+                sparkle.innerHTML = '✨';
+                sparkle.style.position = 'fixed';
+                sparkle.style.left = e.clientX + 'px';
+                sparkle.style.top = e.clientY + 'px';
+                sparkle.style.pointerEvents = 'none';
+                sparkle.style.fontSize = '20px';
+                sparkle.style.animation = 'fadeOut 1s forwards';
+                document.body.appendChild(sparkle);
+                
+                setTimeout(() => sparkle.remove(), 1000);
+            }
+        });
+
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes fadeOut {
+                from {
+                    opacity: 1;
+                    transform: translateY(0);
+                }
+                to {
+                    opacity: 0;
+                    transform: translateY(-30px);
+                }
+            }
+        `;
+        document.head.appendChild(style);
+    </script>
+</body>
+</html>
